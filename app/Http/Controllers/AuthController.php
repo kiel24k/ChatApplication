@@ -40,7 +40,7 @@ class AuthController extends Controller
             return response()->json([
                 'message' => 'Logged in successfully',
                 'token' => $token,
-            ])->cookie('user_token', $token, 24 * 6 * 7, null, null, true, false);
+            ])->cookie('user_token', $token, 24 * 6 * 7, null, null, true, true);
         }
     }
 }

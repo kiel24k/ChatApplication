@@ -17,27 +17,40 @@ const submitLogin = () => {
       password: input.value.password
     }
   }).then(response => {
-    if(response.status == 200){
+
+
+    if (response.status == 200) {
+      localStorage.setItem('checkingAuth', 'checking for authentication')
       Auth_Checking.value = true
     }
+
   }).catch(e => {
-  if(e.status == 422){
-    validation.value = e.response.data.errors
-    invalidCredential.value = ''
-    
-  }else if(e.status == 401){
-    invalidCredential.value = e.response.data
-    validation.value = ''
-  }
- 
+    if (e.status == 422) {
+      validation.value = e.response.data.errors
+      invalidCredential.value = ''
+
+    } else if (e.status == 401) {
+      invalidCredential.value = e.response.data
+      validation.value = ''
+    }
+
   })
 }
 
+const checkLocalStorage = () => {
+  const e = localStorage.getItem('checkingAuth')
+  if (e) {
+    Auth_Checking.value = true
+  }
+}
+
+onMounted(() => {
+  checkLocalStorage()
+})
 
 </script>
 
 <template>
-  
   <div id="login">
     <div class="login-body">
       <div class="form">
@@ -65,23 +78,23 @@ const submitLogin = () => {
                 </button>
               </div>
             </div>
-       <div class="invalidCredentials text-center text-danger mt-3" v-if="invalidCredential">
-        {{ invalidCredential.message }}
-       </div>
+            <div class="invalidCredentials text-center text-danger mt-3" v-if="invalidCredential">
+              {{ invalidCredential.message }}
+            </div>
             <div class="row mt-2">
               <form action="" @submit.prevent>
                 <fieldset>
                   <div class="row mt-3">
                     <div class="col">
                       <label for="">Email</label>
-                      <input type="text" class="form-control" v-model="input.email"  />
+                      <input type="text" class="form-control" v-model="input.email" />
                       <small v-if="validation.email">{{ validation.email[0] }}</small>
                     </div>
                   </div>
                   <div class="row mt-3">
                     <div class="col">
                       <label for="">Password</label>
-                      <input type="text" class="form-control" v-model="input.password" autofocus/>
+                      <input type="text" class="form-control" v-model="input.password" autofocus />
                       <small v-if="validation.password">{{ validation.password[0] }}</small>
                     </div>
                   </div>
@@ -109,9 +122,9 @@ const submitLogin = () => {
       </div>
     </div>
   </div>
-<!-- //components -->
-<AuthChecking v-if="Auth_Checking"/>
-  
+  <!-- //components -->
+  <AuthChecking v-if="Auth_Checking" />
+
 
 </template>
 
@@ -190,8 +203,9 @@ const submitLogin = () => {
     background-color: black;
     color: white;
   }
+
   form small {
-    color:red;
+    color: red;
   }
 }
 
@@ -263,8 +277,9 @@ const submitLogin = () => {
     background-color: black;
     color: white;
   }
+
   form small {
-    color:red;
+    color: red;
   }
 }
 
