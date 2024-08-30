@@ -1,18 +1,24 @@
 <script setup>
 import { onBeforeMount, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 const test = () => {
     axios({
         method: 'GET',
         url: 'api/user'
     }).then(response => {
-        console.log(response);
+        if(response.data.role == 'client'){
+            router.push('/client-dashboard')
+            localStorage.removeItem('checkingAuth')
+        }
     })
 }
 
-onMounted(() => {
+setTimeout(() => {
     test()
-})
+}, 5000);
 
 
 </script>
