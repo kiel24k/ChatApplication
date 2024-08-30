@@ -106,7 +106,7 @@
  border-radius: 20px;
  display: grid;
  justify-content: center;
- align-items: center;
+ align-items: centersgit dsdsta;
 } */
 
     .form {
