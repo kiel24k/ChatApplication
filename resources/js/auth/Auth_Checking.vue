@@ -9,9 +9,18 @@ const test = () => {
         method: 'GET',
         url: 'api/user'
     }).then(response => {
-        if(response.data.role == 'client'){
-            router.push('/client-dashboard')
-            localStorage.removeItem('checkingAuth')
+        if (response.data.role == 'client') {
+
+        }
+        switch (response.data.role) {
+            case 'client':
+                router.push('/client-dashboard')
+                localStorage.removeItem('checkingAuth')
+                break;
+            case 'admin':
+                router.push('/admin-dashboard')
+                localStorage.removeItem('checkingAuth')
+                break;
         }
     })
 }
@@ -24,9 +33,9 @@ setTimeout(() => {
 </script>
 
 <template>
-  
-     <div id="loading">
-        
+
+    <div id="loading">
+
         <div class="loader">
             <span></span>
             <span></span>
@@ -34,18 +43,18 @@ setTimeout(() => {
             <span></span>
             <span></span>
         </div>
-     </div>
-    
+    </div>
+
 </template>
 
 <style scoped>
-#loading{
+#loading {
     display: grid;
     justify-content: center;
     background-color: rgb(245, 231, 231, 0.5);
     backdrop-filter: blur(10px);
     align-items: center;
-    position:fixed;
+    position: fixed;
     z-index: 999;
     height: 100%;
     width: 100%;
@@ -58,7 +67,7 @@ setTimeout(() => {
     background: white;
     padding: 150px;
     box-shadow: 0px 40px 60px -20px rgba(0, 0, 0, 0.2);
-    margin:10px;
+    margin: 10px;
 }
 
 .loader span {

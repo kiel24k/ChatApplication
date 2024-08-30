@@ -17,8 +17,6 @@ const submitLogin = () => {
       password: input.value.password
     }
   }).then(response => {
-
-
     if (response.status == 200) {
       localStorage.setItem('checkingAuth', 'checking for authentication')
       Auth_Checking.value = true
@@ -43,6 +41,7 @@ const checkLocalStorage = () => {
     Auth_Checking.value = true
   }
 }
+
 
 onMounted(() => {
   checkLocalStorage()
