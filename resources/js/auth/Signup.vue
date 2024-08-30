@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter()
@@ -26,6 +26,19 @@ const validation = ref({})
         
     })
  }
+
+ const checkingAuthentication = () => {
+    axios({
+        method: 'GET',
+        url: 'api/user'
+    }).then(response => {
+        console.log(response);
+    })
+}
+
+onMounted(() => {
+checkingAuthentication()
+})
 </script>
 
 <template>
