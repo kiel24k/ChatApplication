@@ -8,6 +8,14 @@ const routes = [
     {
         path: '/signup',
         component: () => import('../auth/Signup.vue')
+    },
+    {
+        path: '/client-dashboard',
+        component: () => import ('../pages/client/Client_Dashboard.vue')
+    },
+    {
+        path: '/admin-dashboard',
+        comonent: () => import('../pages/admin/Admin_Dashboard.vue')
     }
 ]
 
