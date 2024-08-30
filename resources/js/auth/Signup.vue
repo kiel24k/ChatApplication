@@ -1,6 +1,37 @@
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+const input = ref({})
+const validation = ref({})
+ const createAccount = () => {
+    axios({
+        method: 'POST',
+        url: 'api/signup',
+        data: {
+            name: input.value.name,
+            email:input.value.email,
+            password:input.value.password
+        }
+    }).then(response => {
+        if(response.status == 200){
+            router.push('/login')
+        }
+    }).catch(e => {
+        if(e.response.status == 422){
+            validation.value = e.response.data.errors
+        }
+        console.log(e.response.data.errors);
+        
+    })
+ }
+</script>
+
 <template>
     <div id="signup">
         <div class="signup-body">
+
             <div class="form">
                 <div class="display1">
                     <div class="signup-content1">
@@ -30,22 +61,25 @@
                         </div>
 
                         <div class="row mt-2">
-                            <form action="">
+                            <form action="" @submit.prevent>
                                 <fieldset>
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <label for="">Name</label>
-                                            <input type="text" class="form-control" />
+                                            <label for="">Name:</label> 
+                                            <input type="text" class="form-control" v-model="input.name" />
+                                            <small v-if="validation.name">{{ validation.name[0] }}</small>
                                         </div>
                                         <div class="col">
-                                            <label for="">Email</label>
-                                            <input type="text" class="form-control" />
+                                            <label for="">Email:</label> 
+                                            <input type="text" class="form-control" v-model="input.email" />
+                                            <small v-if="validation.email">{{ validation.email[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
                                         <div class="col">
-                                            <label for="">Password</label>
-                                            <input type="text" class="form-control" />
+                                            <label for="">Password</label> 
+                                            <input type="text" class="form-control" v-model="input.password" />
+                                            <small v-if="validation.password">{{ validation.password[0] }}</small>
                                         </div>
                                     </div>
                                     <div class="row mt-3">
@@ -61,7 +95,7 @@
                                     </div>
                                     <div class="row m-3 create-account-btn">
                                         <div class="col text-center">
-                                            <button class="btn btn-info p-2">
+                                            <button class="btn btn-info p-2" @click="createAccount">
                                                 Create an account
                                             </button>
                                         </div>
@@ -70,7 +104,7 @@
                                         <div class="col text-center">
                                             <span>
                                                 account already?
-                                                <a href="">Sign up</a>
+                                                <a href="">Login</a>
                                             </span>
                                         </div>
                                     </div>
@@ -98,17 +132,6 @@
         background-color: rgb(240, 240, 240);
     }
 
-    /* .signup-body {
- max-width: 80rem;
- height: 50rem;
- background-image: url('/public/image/web-design-and-development-concept-developer-team-designing-and-creating-a-website-modern.webp');
- box-shadow: 0px 0px 5px 0px gray;
- border-radius: 20px;
- display: grid;
- justify-content: center;
- align-items: centersgit abnoy ta;
-} */
-
     .form {
         display: flex;
         flex-wrap: wrap;
@@ -118,7 +141,7 @@
 
     .display1 {
         width: 35rem;
-        background-color: white;
+        background-color: white;    
         height: 40rem;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
@@ -177,6 +200,10 @@
     .create-account-btn button:hover {
         background-color: black;
         color: white;
+    }
+    form  small{
+        color:red;
+        font-size: small;
     }
 }
 
@@ -254,6 +281,10 @@
     .create-account-btn button:hover {
         background-color: black;
         color: white;
+    }
+    form  small{
+        color:red;
+        font-size: 11px;
     }
 }
 
