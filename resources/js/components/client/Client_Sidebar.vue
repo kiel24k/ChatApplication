@@ -14,85 +14,85 @@
           <ul class="navbar nav mt-1">
             <small class="p-4">Favorites</small>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
             </div>
             <div class="item1">
-              <li class="nav-link text-dark">
+              <li class="nav-link">
                 <img src="/public/image/dot.png" width="20px" alt="" />
                 Item 1 sample
               </li>
@@ -108,6 +108,8 @@
 aside{
     position: relative;
     width: 17rem;
+    background-color: rgb(31, 29, 29);
+    color:white;
 }
     #sidebar {
       width: 15rem;
@@ -116,6 +118,8 @@ aside{
      position: fixed;
       height: 100%;
       overflow-y: scroll;
+      color:white;  
+      
     }
     /* #sidebar::-webkit-scrollbar {
       width: 2px;
@@ -135,15 +139,17 @@ aside{
       display: flex;
       justify-content: space-between;
       align-items: center;
+     
     }
 
     .item1 {
       width: 100%;
       padding: 15px;
       transition: all linear 0.2s;
+     
     }
     .item1:hover {
-      background: rgb(231, 230, 230);
+      background: rgb(82, 80, 80);
       color: rgb(253, 248, 248);
     }
     .nav-link {
@@ -151,5 +157,6 @@ aside{
       align-items: center;
       gap: 10px;
       color: red;
+      color:white;
     }
   </style>
