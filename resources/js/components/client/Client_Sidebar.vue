@@ -1,3 +1,25 @@
+<script setup>
+
+import { onMounted, ref } from 'vue';
+
+
+const userList = ref({})
+const users = () => {
+  axios({
+    method:'GET',
+    url: 'api/users'
+  }).then(response => {
+    userList.value = response.data
+    
+  })
+}
+
+onMounted(() => {
+  users()
+})
+
+</script>
+
 <template>
     <aside>
       <div id="sidebar">
@@ -13,91 +35,12 @@
         <div class="menu1">
           <ul class="navbar nav mt-1">
             <small class="p-4">Favorites</small>
-            <div class="item1">
+            <div class="item1" v-for="(data,index) in userList" :key="index">
               <li class="nav-link ">
                 <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
+              {{ data.name }}
               </li>
             </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link ">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-            <div class="item1">
-              <li class="nav-link">
-                <img src="/public/image/dot.png" width="20px" alt="" />
-                Item 1 sample
-              </li>
-            </div>
-
           </ul>
         </div>
       </div>
