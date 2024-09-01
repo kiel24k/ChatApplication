@@ -16,7 +16,7 @@ const validation = ref({})
         }
     }).then(response => {
         if(response.status == 200){
-            router.push('/login')
+            router.push('/')
         }
     }).catch(e => {
         if(e.response.status == 422){
@@ -27,12 +27,13 @@ const validation = ref({})
     })
  }
 
+ 
  const checkingAuthentication = () => {
     axios({
         method: 'GET',
         url: 'api/user'
     }).then(response => {
-        console.log(response);
+     
     })
 }
 

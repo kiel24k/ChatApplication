@@ -22,6 +22,7 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->role = 'client';
         $user->save();
     }
     public function login(Request $request)
