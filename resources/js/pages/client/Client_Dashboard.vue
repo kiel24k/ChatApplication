@@ -1,8 +1,10 @@
 <script setup>
 import sidebar from '@/components/client/Client_Sidebar.vue'
+import Header from '@/components/client/Client_Header.vue'
 </script>
 
 <template>
+   <Header />
     <main>
         <sidebar />
         <section>
@@ -46,7 +48,7 @@ import sidebar from '@/components/client/Client_Sidebar.vue'
         </section>
 
     </main>
-
+   
 </template>
 
 <style setup>
