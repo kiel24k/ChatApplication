@@ -1,43 +1,48 @@
 <script setup>
 import sidebar from '@/components/client/Client_Sidebar.vue'
 import Header from '@/components/client/Client_Header.vue'
+import { ref } from 'vue';
+
+const userIdValue = ref()
+const handleMessage = ref()
+const sender_id = ref()
+
+
+const senderID = (id) => {
+    axios({
+        method: 'GET',
+        url: `/api/display-message/${id}/${userIdValue.value}`
+    }).then(response => {
+        sender_id.value = id
+        handleMessage.value = response.data
+        console.log(handleMessage.value);
+
+    })
+}
+const userID = (id) => {
+    userIdValue.value = id
+
+
+} 
 </script>
 
 <template>
-   <Header />
+    <Header @id=userID />
     <main>
-        <sidebar />
+        <sidebar @id=senderID />
         <section>
-            <div class="sender-message">
-                <div class="content">
-                    <span>lorem</span>
+            <div class="message-content" v-for="(data, index) in handleMessage" :key="index">
+                <div class="sender-message" v-if="sender_id == data.sender_id">
+                    <div class="content">
+                       <span>
+                        {{ data.sender_id }} {{ data.message_content }}
+                       </span>
+                    </div>
                 </div>
-                <div class="content">
-                    <span>lorem</span>
-                </div>
-                <div class="content">
-                    <span>lorem</span>
-                </div>
-                <div class="content">
-                    <span>lorem</span>
-                </div>
-                <div class="content">
-                    <span>lorem</span>
-                </div>
-            </div>
-            <div class="receiver-message">
-                <div class="content">
-                    <span>Hellow</span>
-                </div>
-            </div>
-            <div class="receiver-message">
-                <div class="content">
-                    <span>Hellow</span>
-                </div>
-            </div>
-            <div class="receiver-message">
-                <div class="content">
-                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius explicabo reprehenderit quod adipisci natus tenetur ipsam delectus architecto asperiores, modi eum? Vel laborum culpa quis blanditiis veniam at perspiciatis voluptatum.</span>
+                <div class="receiver-message" v-if="userIdValue == data.receiver_id">
+                    <div class="content">
+                        <span> {{ data.receiver_id }} {{ data.message_content }}</span>
+                    </div>
                 </div>
             </div>
             <div class="enter-message">
@@ -48,7 +53,7 @@ import Header from '@/components/client/Client_Header.vue'
         </section>
 
     </main>
-   
+
 </template>
 
 <style setup>
@@ -81,15 +86,15 @@ section::-webkit-scrollbar-track {
 .sender-message {
     width: 100%;
     display: grid;
-    justify-content: end;
+    justify-content: start;
 
 }
 
 .receiver-message {
     width: 100%;
     display: grid;
-    justify-content: start;
-   
+    justify-content: end;
+
 }
 
 .content {
@@ -99,7 +104,7 @@ section::-webkit-scrollbar-track {
     min-height: 23px;
     border-radius: 25px;
     margin: 40px;
-    color:white;
+    color: white;
     font-size: 15px;
     display: grid;
     align-items: center;
@@ -114,22 +119,25 @@ section::-webkit-scrollbar-track {
 .enter-message-content {
     display: flex;
 }
-.enter-message-content input{
-    color:rgb(253, 248, 248);
+
+.enter-message-content input {
+    color: rgb(253, 248, 248);
     background-color: rgb(87, 86, 86);
     border-radius: 50px;
-    padding:8px;
-    border:0;
-    margin-top:20px;
-    width:100%;
-   
+    padding: 8px;
+    border: 0;
+    margin-top: 20px;
+    width: 100%;
+
 }
-.enter-message-content input::placeholder{
-    color:white;
+
+.enter-message-content input::placeholder {
+    color: white;
 }
-.enter-message-content input:focus{
+
+.enter-message-content input:focus {
     background-color: rgb(87, 86, 86);
     outline: none;
-    color:white;
+    color: white;
 }
 </style>
