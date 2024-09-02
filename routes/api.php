@@ -20,6 +20,8 @@ route::controller(AuthController::class)->group(function () {
 
 route::controller(ChatController::class)->group(function () {
     route::get('/users', 'getUsers');
+    route::post('/submit-messsage', 'submitMessage');
+    route::get('/display-message/{senderID}/{receiverID}', 'displayMessage');
 });
 
 

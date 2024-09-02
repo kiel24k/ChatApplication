@@ -1,6 +1,7 @@
 <script setup>
 
 import { onMounted, ref } from 'vue';
+const emit = defineEmits(['id'])
 const userData = ref({})
 const user = async () => {
     await axios({
@@ -8,6 +9,7 @@ const user = async () => {
         url: 'api/user'
     }).then(response => {
         userData.value = response.data
+        emit('id', userData.value.id)
     })
 
 }
