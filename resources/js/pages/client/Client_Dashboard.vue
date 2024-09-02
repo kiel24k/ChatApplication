@@ -1,7 +1,7 @@
 <script setup>
 import sidebar from '@/components/client/Client_Sidebar.vue'
 import Header from '@/components/client/Client_Header.vue'
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 const userIdValue = ref()
 const handleMessage = ref()
@@ -35,9 +35,12 @@ const submitMessage = () => {
         }
     }).then(response => {
         console.log(response);
+        senderID(sender_id.value)
         
     })
 }
+
+
 
 
 </script>
@@ -67,6 +70,7 @@ const submitMessage = () => {
                 </div>
             </div>
         </section>
+
     </main>
 
 </template>
