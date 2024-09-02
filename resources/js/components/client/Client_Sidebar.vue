@@ -67,6 +67,7 @@ aside {
   height: 100%;
   overflow-y: scroll;
   color: white;
+  background-color: black
 
 }
 

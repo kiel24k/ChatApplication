@@ -6,6 +6,7 @@ import { ref } from 'vue';
 const userIdValue = ref()
 const handleMessage = ref()
 const sender_id = ref()
+const message = ref('')
 
 
 const senderID = (id) => {
@@ -16,14 +17,29 @@ const senderID = (id) => {
         sender_id.value = id
         handleMessage.value = response.data
         console.log(handleMessage.value);
-
     })
 }
+
 const userID = (id) => {
     userIdValue.value = id
+}
+
+const submitMessage = () => {
+    axios({
+        method: 'POST',
+        url: 'api/submit-messsage',
+        data: {
+            sender_id: userIdValue.value,
+            receiver_id: sender_id.value,
+            message_content: message.value
+        }
+    }).then(response => {
+        console.log(response);
+        
+    })
+}
 
 
-} 
 </script>
 
 <template>
@@ -34,24 +50,23 @@ const userID = (id) => {
             <div class="message-content" v-for="(data, index) in handleMessage" :key="index">
                 <div class="sender-message" v-if="sender_id == data.sender_id">
                     <div class="content">
-                       <span>
-                        {{ data.sender_id }} {{ data.message_content }}
-                       </span>
+                        <span>
+                            {{ sender_id }} {{ data.message_content }}
+                        </span>
                     </div>
                 </div>
-                <div class="receiver-message" v-if="userIdValue == data.receiver_id">
+                <div class="receiver-message" v-else="userIdValue == data.receiver_id">
                     <div class="content">
-                        <span> {{ data.receiver_id }} {{ data.message_content }}</span>
+                        <span> {{ userIdValue }} {{ data.message_content }}</span>
                     </div>
                 </div>
             </div>
             <div class="enter-message">
                 <div class="enter-message-content">
-                    <input type="text" placeholder="Type Message...">
+                    <input type="text" placeholder="Type Message..." v-model="message" @keyup.enter="submitMessage">
                 </div>
             </div>
         </section>
-
     </main>
 
 </template>
@@ -60,6 +75,7 @@ const userID = (id) => {
 main {
     display: flex;
 
+
 }
 
 section {
@@ -67,6 +83,7 @@ section {
     width: 100%;
     overflow: scroll;
     overflow-x: hidden;
+    overflow-anchor: none;
 }
 
 section::-webkit-scrollbar {
@@ -81,6 +98,10 @@ section::-webkit-scrollbar-thumb {
 
 section::-webkit-scrollbar-track {
     background-color: #f4f9fa;
+}
+.message-content{
+    overflow-anchor: none;
+    
 }
 
 .sender-message {
