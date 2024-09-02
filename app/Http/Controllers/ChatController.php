@@ -30,6 +30,5 @@ class ChatController extends Controller
         })->get();
 
         return response()->json($chat);
-        
     }
 }
