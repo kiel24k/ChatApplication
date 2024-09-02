@@ -1,12 +1,25 @@
 <script setup>
 import sidebar from '@/components/client/Client_Sidebar.vue'
 import Header from '@/components/client/Client_Header.vue'
-import { ref, watch } from 'vue';
+import { ref,nextTick, watch, onMounted } from 'vue';
 
 const userIdValue = ref()
 const handleMessage = ref()
 const sender_id = ref()
 const message = ref('')
+const scrollContainer = ref(null)
+
+const scrollBottom = () => {
+    if(scrollContainer.value){
+        scrollContainer.value.scrollTop = scrollContainer.value.scrollHeight
+    }
+
+    
+}
+
+watch(handleMessage,(newHandleMessage, OldHandleMEssage) => {
+    scrollBottom()
+}, { immediate: true }); 
 
 
 const senderID = (id) => {
@@ -16,8 +29,10 @@ const senderID = (id) => {
     }).then(response => {
         sender_id.value = id
         handleMessage.value = response.data
-        console.log(handleMessage.value);
+        scrollBottom()
     })
+ 
+ 
 }
 
 const userID = (id) => {
@@ -34,14 +49,15 @@ const submitMessage = () => {
             message_content: message.value
         }
     }).then(response => {
-        console.log(response);
         senderID(sender_id.value)
-        
     })
+   
 }
 
 
-
+onMounted(() => {
+    scrollBottom()
+})
 
 </script>
 
@@ -49,8 +65,9 @@ const submitMessage = () => {
     <Header @id=userID />
     <main>
         <sidebar @id=senderID />
-        <section>
+        <section ref="scrollContainer">
             <div class="message-content" v-for="(data, index) in handleMessage" :key="index">
+                
                 <div class="sender-message" v-if="sender_id == data.sender_id">
                     <div class="content">
                         <span>
@@ -58,7 +75,7 @@ const submitMessage = () => {
                         </span>
                     </div>
                 </div>
-                <div class="receiver-message" v-else="userIdValue == data.receiver_id">
+                <div class="receiver-message " v-else="userIdValue == data.receiver_id">
                     <div class="content">
                         <span> {{ userIdValue }} {{ data.message_content }}</span>
                     </div>
@@ -83,11 +100,16 @@ main {
 }
 
 section {
-    background-color: rgb(10, 10, 10);
+    height: 80rem; /* Set a fixed height for the container */
     width: 100%;
-    overflow: scroll;
-    overflow-x: hidden;
+    overflow-y: scroll; /* Enable vertical scrolling */
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     overflow-anchor: none;
+    scroll-snap-align: end;
+    
 }
 
 section::-webkit-scrollbar {
@@ -104,10 +126,10 @@ section::-webkit-scrollbar-track {
     background-color: #f4f9fa;
 }
 .message-content{
+    display: flex;
+    flex-direction: column-reverse;
     overflow-anchor: none;
-    
 }
-
 .sender-message {
     width: 100%;
     display: grid;
@@ -133,6 +155,7 @@ section::-webkit-scrollbar-track {
     font-size: 15px;
     display: grid;
     align-items: center;
+    overflow-wrap:anywhere;
 }
 
 .enter-message {

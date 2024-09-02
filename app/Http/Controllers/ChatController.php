@@ -27,8 +27,7 @@ class ChatController extends Controller
         })->orWhere(function ($query) use ($senderID, $receiverID) {
             $query->where('sender_id', $receiverID)
                 ->where('receiver_id', $senderID);
-        })->get();
-
+        })->orderBy('id', 'asc')->get();
         return response()->json($chat);
     }
 }
