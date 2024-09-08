@@ -8,19 +8,13 @@ const handleMessage = ref()
 const sender_id = ref()
 const message = ref('')
 const scrollContainer = ref(null)
+const status = ref({})
 
 const scrollBottom = () => {
     if(scrollContainer.value){
         scrollContainer.value.scrollTop = scrollContainer.value.scrollHeight
     }
-
-    
 }
-
-watch(handleMessage,(newHandleMessage, OldHandleMEssage) => {
-    scrollBottom()
-}, { immediate: true }); 
-
 
 const senderID = (id) => {
     axios({
@@ -29,14 +23,23 @@ const senderID = (id) => {
     }).then(response => {
         sender_id.value = id
         handleMessage.value = response.data
+        status.value = response.status  
         scrollBottom()
     })
- 
- 
 }
 
 const userID = (id) => {
     userIdValue.value = id
+}
+
+
+
+const RealtimeMessage = () => {
+    Echo.private(`private-channel.${sender_id.value}`)
+    .listen('ChatEvent', (event) => {
+      senderID(sender_id.value)
+      scrollBottom()
+    })
 }
 
 const submitMessage = () => {
@@ -50,14 +53,29 @@ const submitMessage = () => {
         }
     }).then(response => {
         senderID(sender_id.value)
+        message.value = ''
+       
+        
     })
-   
 }
+
+watch(handleMessage,(newHandleMessage, OldHandleMEssage) => {
+    scrollBottom()
+    RealtimeMessage()
+}, { immediate: true }); 
+
+
+
+
 
 
 onMounted(() => {
     scrollBottom()
+    RealtimeMessage()
+    
+    
 })
+
 
 </script>
 

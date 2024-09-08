@@ -11,7 +11,6 @@ const user = async () => {
         userData.value = response.data
         emit('id', userData.value.id)
     })
-
 }
 
 onMounted(() => {

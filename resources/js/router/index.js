@@ -18,6 +18,10 @@ const routes = [
         path: "/admin-dashboard",
         component: () => import("../pages/admin/Admin_Dashboard.vue"),
     },
+    {
+        path: '/test',
+        component: () => import('../test.vue')
+    }
 ];
 
 const router = createRouter({
