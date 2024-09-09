@@ -118,7 +118,7 @@ checkingAuthentication()
                                         <div class="col text-center">
                                             <span>
                                                 account already?
-                                                <a href="">Login</a>
+                                                <router-link :to="{name: '/'}">Login</router-link>
                                             </span>
                                         </div>
                                     </div>

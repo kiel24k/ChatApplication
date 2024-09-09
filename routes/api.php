@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,5 +26,8 @@ route::controller(ChatController::class)->group(function () {
     //test public event for chat
     route::get('/test-event', 'testEvent');
 });
+
+Route::get('auth/google', [GoogleController::class, 'redirect']);
+Route::get('auth/google/callback', [GoogleController::class, 'callBackGoogle']);
 
 
