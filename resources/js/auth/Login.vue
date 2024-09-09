@@ -42,6 +42,13 @@ const checkLocalStorage = () => {
   }
 }
 
+const loginWithGoogle = () => {
+
+
+window.location.href = 'api/auth/google'
+
+}
+
 
 onMounted(() => {
   checkLocalStorage()
@@ -69,7 +76,7 @@ onMounted(() => {
                 </button>
               </div>
               <div class="col">
-                <button class="btn">
+                <button class="btn" @click="loginWithGoogle">
                   <span>
                     <img src="/public/image/1920525_gogle_google_logo_network_icon.png" width="30px" alt="" />
                     Login with Goodle
