@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChatEvent;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class ChatController extends Controller
         $message->receiver_id = $request->receiver_id;
         $message->message_content = $request->message_content;
         $message->save();
+        event(new ChatEvent($request->sender_id, $request->message_content));
         return response()->json($message);
     }
     public function displayMessage($senderID, $receiverID) {
@@ -30,4 +32,10 @@ class ChatController extends Controller
         })->orderBy('id', 'asc')->get();
         return response()->json($chat);
     }
+    // public function testEvent(){
+    //     $message = "HELLOW";
+    //     $id = 1;
+    //     event(new ChatEvent($message,$id));
+        
+    // }
 }

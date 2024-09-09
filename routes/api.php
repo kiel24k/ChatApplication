@@ -22,6 +22,8 @@ route::controller(ChatController::class)->group(function () {
     route::get('/users', 'getUsers');
     route::post('/submit-messsage', 'submitMessage');
     route::get('/display-message/{senderID}/{receiverID}', 'displayMessage');
+    //test public event for chat
+    route::get('/test-event', 'testEvent');
 });
 
 
