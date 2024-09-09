@@ -54,7 +54,7 @@ onMounted(() => {
 <style scoped>
 aside {
   position: relative;
-  width: 17rem;
+  width: 18rem;
   background-color: rgb(31, 29, 29);
   color: white;
 }
@@ -69,6 +69,20 @@ aside {
   color: white;
   background-color: black
 
+}
+
+#sidebar::-webkit-scrollbar {
+  width: 1px;
+  height: 50px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background-color: #d3d3d3;
+  border-radius: 10px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+  background-color: #f4f9fa;
 }
 
 .active {

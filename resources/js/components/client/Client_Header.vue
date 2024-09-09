@@ -42,7 +42,7 @@ header {
     width: 100%;
     position: fixed;
     top: 0;
-    background-color: rgba(230, 227, 227, 0.5);
+    background-color: rgba(129, 129, 129, 0.5);
     backdrop-filter: blur(10px);
     color: white;
     padding: 10px;

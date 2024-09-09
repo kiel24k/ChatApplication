@@ -11,9 +11,10 @@ const scrollContainer = ref(null)
 const status = ref({})
 
 const scrollBottom = () => {
-    if(scrollContainer.value){
-        scrollContainer.value.scrollTop = scrollContainer.value.scrollHeight
+    if (scrollContainer.value) {
+        scrollContainer.value.scrollTop = scrollContainer.value.scrollHeight;
     }
+   
 }
 
 const senderID = (id) => {
@@ -67,13 +68,14 @@ watch(handleMessage,(newHandleMessage, OldHandleMEssage) => {
 
 
 
-
+// watch(scrollContainer, (oldVal, newVal) => {
+//     console.log(scrollContainer.value.scrollTop);
+// })
 
 onMounted(() => {
     scrollBottom()
     RealtimeMessage()
-    
-    
+
 })
 
 
@@ -85,16 +87,15 @@ onMounted(() => {
         <sidebar @id=senderID />
         <section ref="scrollContainer">
             <div class="message-content" v-for="(data, index) in handleMessage" :key="index">
-                
                 <div class="sender-message" v-if="sender_id == data.sender_id">
-                    <div class="content">
+                    <div class="content-1">
                         <span>
                             {{ sender_id }} {{ data.message_content }}
                         </span>
                     </div>
                 </div>
                 <div class="receiver-message " v-else="userIdValue == data.receiver_id">
-                    <div class="content">
+                    <div class="content-2">
                         <span> {{ userIdValue }} {{ data.message_content }}</span>
                     </div>
                 </div>
@@ -105,7 +106,6 @@ onMounted(() => {
                 </div>
             </div>
         </section>
-
     </main>
 
 </template>
@@ -162,7 +162,20 @@ section::-webkit-scrollbar-track {
 
 }
 
-.content {
+.content-1 {
+    max-width: 30rem;
+    background: rgb(129, 134, 138);
+    padding: 10px;
+    min-height: 23px;
+    border-radius: 25px;
+    margin: 40px;
+    color: white;
+    font-size: 15px;
+    display: grid;
+    align-items: center;
+    overflow-wrap:anywhere;
+}
+.content-2 {
     max-width: 30rem;
     background: rgb(15, 104, 187);
     padding: 10px;
@@ -189,11 +202,11 @@ section::-webkit-scrollbar-track {
 .enter-message-content input {
     color: rgb(253, 248, 248);
     background-color: rgb(87, 86, 86);
-    border-radius: 50px;
+    border-radius: 10px;
     padding: 8px;
     border: 0;
     margin-top: 20px;
-    width: 100%;
+    width: 90rem;
 
 }
 
